@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/project_box_1"
+        android:layout_width="355dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangle_box"
+        android:backgroundTint="#A483BD"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/project_box2"
+        android:layout_width="355dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rectangle_box"
+        android:backgroundTint="#A483BD"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/project_box_1" />
+
+    <TextView
+        android:id="@+id/registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="261dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Registration"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_1"
+        app:layout_constraintStart_toStartOf="@+id/project_box_1"
+        app:layout_constraintTop_toTopOf="@+id/project_box_1" />
+
+    <TextView
+        android:id="@+id/teamDes"
+        android:layout_width="293dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="SP is added to your planner by faculty"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_1"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registration" />
+
+    <TextView
+        android:id="@+id/working"
+        android:layout_width="119dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="170dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Start Working"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/project_box2" />
+
+    <TextView
+        android:id="@+id/teamDes2"
+        android:layout_width="291dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="SP starts as soon as the semester starts"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/working" />
+
+    <TextView
+        android:id="@+id/project_box_3"
+        android:layout_width="355dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rectangle_box"
+        android:backgroundTint="#A483BD"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/project_box2" />
+
+    <TextView
+        android:id="@+id/Final"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Final Report"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_3"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="@+id/project_box_3"
+        app:layout_constraintTop_toTopOf="@+id/project_box_3" />
+
+    <TextView
+        android:id="@+id/teamDes3"
+        android:layout_width="291dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Must be submitted to the committee one week before the defence"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_3"
+        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintStart_toStartOf="@+id/project_box_3"
+        app:layout_constraintTop_toBottomOf="@+id/Final" />
+
+    <TextView
+        android:id="@+id/project_box_4"
+        android:layout_width="355dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rectangle_box"
+        android:backgroundTint="#A483BD"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/project_box_3" />
+
+    <TextView
+        android:id="@+id/Defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Final Defense"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_4"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="@+id/project_box_4"
+        app:layout_constraintTop_toTopOf="@+id/project_box_4" />
+
+    <TextView
+        android:id="@+id/teamDes4"
+        android:layout_width="291dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin_bold"
+        android:text="Present your work at designated timeslot."
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/project_box_4"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toStartOf="@+id/project_box_4"
+        app:layout_constraintTop_toBottomOf="@+id/Defense" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

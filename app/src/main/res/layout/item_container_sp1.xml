@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#F2F2F2"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FAFAFA"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/nameSP1"
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8sp"
+            android:fontFamily="@font/cabin_bold"
+            android:gravity="left"
+            android:text="A case study of the indoor performance of Bluetooth Smart with Raspberry Pi 3"
+            android:textColor="#4C4949"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/grpSP1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cabin_bold"
+            android:gravity="left"
+            android:text="The Final Fight"
+            android:textColor="#9B9B9B"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/semSP1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/cabin_bold"
+            android:gravity="left"
+            android:text="2/2016"
+            android:textColor="#BFBFBF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/SP1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="250sp"
+            android:fontFamily="@font/cabin_bold"
+            android:gravity="left"
+            android:text="Senior Project 1"
+            android:textColor="#5B027182"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/color_bar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/sp1_bar">
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

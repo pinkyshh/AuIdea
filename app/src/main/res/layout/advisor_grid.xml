@@ -1,0 +1,70 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FAFAFA"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayoutManager"
+        android:layout_width="180dp"
+        android:layout_height="280dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="263dp"
+            android:padding="5dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView"
+                android:layout_width="95dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/dobri" />
+
+            <TextView
+                android:id="@+id/advisorName"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-80dp"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/cabin_bold"
+                android:text="Dr. Dobri Atanassov Batovski"
+                android:textColor="#222222"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/advisorDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-150dp"
+                android:layout_marginTop="170dp"
+                android:text="Asst.Prof"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/viewAdvisorButtonGrid"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="-165dp"
+            android:layout_marginTop="210dp"
+            android:background="@drawable/button"
+            android:text="View"
+            android:textColor="#FFFCFC"
+            android:textStyle="bold" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+</androidx.cardview.widget.CardView>

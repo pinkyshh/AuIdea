@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "535117097411",
+    "project_id": "auidea-54a38",
+    "storage_bucket": "auidea-54a38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535117097411:android:68f8bd2734a75449c03576",
+        "android_client_info": {
+          "package_name": "lipika.androidapp.gridlayoutadvisor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535117097411-fhjeiiv9g3jonu76botenc8tsbmbhi4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lipika.androidapp.gridlayoutadvisor",
+            "certificate_hash": "06ef361b3af9b59278427acdfbfc1b978b84ac59"
+          }
+        },
+        {
+          "client_id": "535117097411-vnai2ju4nj166097id2k5sjo4v6fctqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOgeLrO5pAIrwOVZGFrEGA6HENMv4Pquw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535117097411-vnai2ju4nj166097id2k5sjo4v6fctqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

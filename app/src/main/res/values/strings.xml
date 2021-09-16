@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GridLayoutAdvisor</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="senior_project">Senior projects are opportunities for students to produce tangible products to add to their portfolios. In order to succeed, students need to exercise management skill as well as their techincal skill.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+
+</resources>

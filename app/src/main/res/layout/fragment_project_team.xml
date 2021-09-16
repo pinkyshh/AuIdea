@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<TextView
+    android:id="@+id/projDetail"
+    android:layout_width="348dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:fontFamily="@font/cabin_semibold"
+    android:lineSpacingExtra="5dp"
+    android:text="Mara Alissa Dalisay\n5645451"
+    android:textColor="#222222"
+    android:textSize="20dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.507"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<TextView
+    android:id="@+id/groupMember"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:fontFamily="@font/cabin_bold"
+    android:text="Group Members"
+    android:textColor="#80222222"
+    android:textSize="15dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.104"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/projDetail" />
+
+<TextView
+    android:id="@+id/divider"
+    android:layout_width="348dp"
+    android:layout_height="3dp"
+    android:layout_marginTop="232dp"
+    android:background="#DDDDDD"
+    android:gravity="center_horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.492"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/groupMember" />
+
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/circleImageView"
+    android:layout_width="52dp"
+    android:layout_height="49dp"
+    android:layout_gravity="left"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="12dp"
+    android:src="@drawable/darun"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+<TextView
+    android:id="@+id/projectAdvisor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="9dp"
+    android:fontFamily="@font/cabin_semibold"
+    android:text="Project Advisor"
+    android:textSize="15dp"
+    app:layout_constraintHorizontal_bias="0.072"
+    app:layout_constraintStart_toEndOf="@+id/circleImageView"
+    app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+
+<TextView
+    android:id="@+id/projectAdvisorName"
+    android:layout_width="216dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:fontFamily="@font/cabin_semibold"
+    android:text="Asst.Prof Kiratijuta Bhumichitr"
+    android:textColor="#222222"
+    android:textSize="20dp"
+    app:layout_constraintEnd_toStartOf="@+id/viewAdvisorButtonGrid"
+    app:layout_constraintHorizontal_bias="0.343"
+    app:layout_constraintStart_toEndOf="@+id/circleImageView"
+    app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <ImageButton
+        android:id="@+id/viewAdvisorButtonGrid"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

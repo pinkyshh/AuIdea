@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_drawable">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2000dp">
+
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="157dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text="ABOUT"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SP"
+            android:layout_width="354dp"
+            android:layout_height="177dp"
+            android:layout_below="@+id/header"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="315dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text="@string/senior_project"
+            android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/sp1"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="270dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text="Senior Project 1"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/color_bar"
+            android:layout_width="69dp"
+            android:layout_height="4dp"
+            android:layout_below="@+id/sp1"
+            android:layout_alignEnd="@+id/sp1"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="144dp"
+            android:background="@drawable/aboutbar"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/spdec1"
+            android:layout_width="351dp"
+            android:layout_height="124dp"
+            android:layout_below="@+id/color_bar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text=" A culminating project (also known as a senior project, grad project or exit project), is a project that challenges high school seniors to demonstrate their academic knowledge in an experiential way (in most cases)."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/sp2"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spdec1"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text="Senior Project 2"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/sp2bar"
+            android:layout_width="77dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/sp2"
+            android:layout_alignEnd="@+id/sp2"
+            android:layout_alignBottom="@+id/sp2"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="255dp"
+            android:layout_marginBottom="-13dp"
+            android:background="@drawable/aboutbar"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/spdec2"
+            android:layout_width="351dp"
+            android:layout_height="124dp"
+            android:layout_below="@+id/color_bar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text=" A culminating project (also known as a senior project, grad project or exit project), is a project that challenges high school seniors to demonstrate their academic knowledge in an experiential way (in most cases)."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/spdec"
+            android:layout_width="351dp"
+            android:layout_height="124dp"
+            android:layout_below="@+id/color_bar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="211dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text=" A culminating project (also known as a senior project, grad project or exit project), is a project that challenges high school seniors to demonstrate their academic knowledge in an experiential way (in most cases)."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/timeline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="650dp"
+            android:layout_marginEnd="276dp"
+            android:fontFamily="@font/cabin_bold"
+            android:text=" Timeline"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/timelinebar"
+            android:layout_width="69dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="690dp"
+            android:layout_marginEnd="299dp"
+            android:background="@drawable/aboutbar" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="710dp"
+            android:layout_marginEnd="1dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timelinebar">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/pre"
+                android:layout_width="156dp"
+                android:layout_marginLeft="40dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/unselector_tag_button_post"
+                android:gravity="center"
+                android:button="@color/transparent"
+                android:text="Pre-Registration"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <RadioButton
+                android:id="@+id/post"
+                android:layout_width="156dp"
+                android:layout_marginLeft="40dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tag_button_post"
+                android:text="Post-Registration"
+                android:button="@color/transparent"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </RadioGroup>
+
+        </LinearLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="lipika.androidapp.about.PreFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/linearLayout"
+            android:layout_marginTop="60dp"
+            tools:layout="@layout/fragment_pre" />
+
+
+    </RelativeLayout>
+
+
+
+</ScrollView>
