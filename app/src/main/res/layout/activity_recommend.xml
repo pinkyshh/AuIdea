@@ -35,7 +35,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="80dp"
             android:fontFamily="@font/cabin_bold"
-            android:text="Explore Senior Projects"
+            android:text="Recommendations for you"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.088"
@@ -55,21 +55,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/filterIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="360dp"
-            app:srcCompat="@drawable/ic_action_filter" />
-
-        <ImageView
-            android:id="@+id/savedIcon"
-            android:layout_width="31dp"
-            android:layout_height="26dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="25dp"
-            app:srcCompat="@drawable/ic_action_save" />
 
 
     </FrameLayout>
@@ -85,7 +70,7 @@
         app:menu="@menu/bottom_nav" >
 
         <ImageButton
-            android:id="@+id/aboutButton"
+            android:id="@+id/downloadButton"
             android:layout_width="63dp"
             android:layout_height="61dp"
             android:layout_gravity="center_horizontal"
@@ -95,5 +80,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

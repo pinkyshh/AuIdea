@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,17 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.AllApi
-import api.HomeProject
-import api.HomeProjectItem
+import api.Recommendation
+import api.RecommendationItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_recommend.*
 import kotlinx.android.synthetic.main.activity_recommend.bottom_navigation_view
 import kotlinx.android.synthetic.main.activity_recommend.recyclerView
-import kotlinx.android.synthetic.main.profile_popup.*
+import kotlinx.android.synthetic.main.advisor_information.*
+import kotlinx.android.synthetic.main.slidable_menu.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,18 +32,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val REQUEST_CODE=102
 private const val REQUEST_CODE1=103
 
-class HomeActivity : AppCompatActivity() {
+class RecommendActivity : AppCompatActivity() {
 
-    private var list: HomeProject = HomeProject()
+    private var list:Recommendation = Recommendation()
     private lateinit var listAdapter: ProjectAdapter
-    lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var auth: FirebaseAuth
+    lateinit var toggle:ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-
-        auth = Firebase.auth
+        setContentView(R.layout.activity_recommend)
 
         val top_fragment=TopFragment()
         supportFragmentManager.beginTransaction().replace(R.id.topContainerView, top_fragment).commit()
@@ -64,32 +58,22 @@ class HomeActivity : AppCompatActivity() {
 
         val Api: AllApi = retrofit.create(AllApi::class.java)
 
-//        Get Project HomeScreen
-        val getProjectRequest: Call<HomeProject> = Api.getHomeProject()
-        getProjectRequest.enqueue(object : Callback<HomeProject> {
+//        Get Recommendation HomeScreen
+        val getRecommendationRequest: Call<Recommendation> = Api.getRecommendation()
+        getRecommendationRequest.enqueue(object : Callback<Recommendation> {
 
-            override fun onResponse(call: Call<HomeProject>, response: Response<HomeProject>) {
-                var projectResponse = response.body()
-                if (projectResponse!=null) {
-                    listAdapter.setData(projectResponse)
-                    Log.d("SPARK-API", projectResponse.toString())
+            override fun onResponse(call: Call<Recommendation>, response: Response<Recommendation>) {
+                var recommendationResponse = response.body()
+                if (recommendationResponse!=null) {
+                    listAdapter.setData(recommendationResponse)
+                    Log.d("SPARK-API", recommendationResponse.toString())
                 }
             }
 
-            override fun onFailure(call: Call<HomeProject>, t: Throwable) {
+            override fun onFailure(call: Call<Recommendation>, t: Throwable) {
                 Log.d("SPARK-API","Failed to Request!")
             }
         })
-
-//        logoutButton.setOnClickListener {
-////            Log.i(LoginActivity.TAG, "Logout")
-////            auth.signOut()
-//            FirebaseAuth.getInstance().signOut();
-//            val logoutIntent = Intent(this, LoginActivity::class.java)
-//            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(logoutIntent)
-//            finish()
-//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -138,13 +122,13 @@ class HomeActivity : AppCompatActivity() {
         var sem: TextView = itemView.findViewById(R.id.semSP1)
         var type: TextView = itemView.findViewById(R.id.SP1)
 
-        lateinit var project: HomeProjectItem
+        lateinit var project: RecommendationItem
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun bind(project: HomeProjectItem){
+        fun bind(project: RecommendationItem){
             this.project=project
             p_name.text = (project.projectTitle)
             g_name.setText(project.groupName)
@@ -161,6 +145,8 @@ class HomeActivity : AppCompatActivity() {
 
             startActivityForResult(intent, REQUEST_CODE)
         }
+
+
     }
 
     private inner class View2Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
@@ -171,7 +157,7 @@ class HomeActivity : AppCompatActivity() {
 
         lateinit var project: Project
 
-        fun bind(project: HomeProjectItem){
+        fun bind(project: RecommendationItem){
             p_name.text = (project.projectTitle)
             g_name.setText(project.groupName)
             sem.text = (project.semester)
@@ -180,7 +166,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun onClick(v: View?) {
-            val intent= Intent(v!!.context,ProjectDetail::class.java)
+            val intent=Intent(v!!.context,ProjectDetail::class.java)
             intent.putExtra("p_name",project.project_name)
             intent.putExtra("g_name",project.group_name)
             intent.putExtra("sem",project.semester)
@@ -190,8 +176,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private inner class ProjectAdapter(var projects: HomeProject):
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private inner class ProjectAdapter(var projects:Recommendation):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var seniorProject1=1
         var seniorProject2=2
 
@@ -206,8 +191,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val project = projects[position]
-            if (project.projectType == 1) {
+            val project=projects[position]
+            if (project.projectType==1) {
                 (holder as View1Holder).bind(project)
             } else {
                 (holder as View2Holder).bind(project)
@@ -228,7 +213,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        fun setData(project: HomeProject) {
+        fun setData(project:Recommendation) {
             projects = project
             notifyDataSetChanged()
         }
@@ -236,3 +221,4 @@ class HomeActivity : AppCompatActivity() {
     }
 
 }
+

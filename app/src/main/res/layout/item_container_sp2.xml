@@ -2,77 +2,80 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="380dp"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="8dp"
     android:background="#F2F2F2"
     android:layout_gravity="center_horizontal"
     app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FAFAFA"
-        android:orientation="vertical"
-        android:padding="10dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#FAFAFA"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="10dp">-->
 
         <TextView
             android:id="@+id/nameSP2"
             android:layout_width="335dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8sp"
+            android:layout_marginLeft="15sp"
             android:fontFamily="@font/cabin_bold"
             android:gravity="left"
-            android:text="Using data analytics to predict student performance for recommended courses"
+            android:text="A case study of the indoor performance of Bluetooth Smart with Raspberry Pi 3"
             android:textColor="#4C4949"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/grpSP2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/cabin_bold"
             android:gravity="left"
-            android:text="The Final Fight"
             android:textColor="#9B9B9B"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:text="The Final Fight" />
 
 
         <TextView
             android:id="@+id/semSP2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="100dp"
             android:fontFamily="@font/cabin_bold"
             android:gravity="left"
-            android:text="2/2016"
             android:textColor="#BFBFBF"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:text="2/2016" />
 
         <TextView
             android:id="@+id/SP2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="250sp"
+            android:layout_marginLeft="265dp"
+            android:layout_marginTop="100dp"
             android:fontFamily="@font/cabin_bold"
             android:gravity="left"
-            android:text="Senior Project 2"
             android:textColor="#5CAE502A"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:text="Senior Project 2" />
 
         <FrameLayout
             android:id="@+id/color_bar2"
             android:layout_width="match_parent"
             android:layout_height="12dp"
+            android:layout_marginTop="138dp"
             android:background="@drawable/sp2_bar" />
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </androidx.cardview.widget.CardView>

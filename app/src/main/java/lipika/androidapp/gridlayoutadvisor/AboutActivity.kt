@@ -1,8 +1,11 @@
 package lipika.androidapp.gridlayoutadvisor
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,4 +27,4 @@ class AboutActivity : AppCompatActivity() {
             }
         }
     }
-    }
+}

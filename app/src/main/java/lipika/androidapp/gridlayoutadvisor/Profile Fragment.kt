@@ -20,6 +20,7 @@ class ProfileFragment:Fragment() {
         return view
     }
 
+
     override fun onStart() {
         super.onStart()
     }

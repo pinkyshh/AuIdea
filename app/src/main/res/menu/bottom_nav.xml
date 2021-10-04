@@ -5,15 +5,18 @@
         android:title=""
         android:icon="@drawable/ic_action_home"/>
 
+    <item android:id="@+id/recommendActivity"
+        android:title=""
+        android:icon="@drawable/ic_action_recommend"/>
+
+    <item android:id="@+id/navAbout"
+        android:title="" />
+
     <item android:id="@+id/navAdvisor"
         android:title=""
         android:icon="@drawable/ic_action_advisor" />
 
-    <item android:id="@+id/save"
-        android:title=""
-        android:icon="@drawable/ic_action_save"/>
-
-    <item android:id="@+id/profile"
+    <item android:id="@+id/navProfile"
         android:title=""
         android:icon="@drawable/ic_action_profile"/>
 

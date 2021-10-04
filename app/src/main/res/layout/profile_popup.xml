@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="120dp"
-            android:text="Pinky Shahi"
+            android:text="ABCD EFGH"
             android:textColor="@color/menuColor"
             android:textSize="20sp" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
-            android:text="6135205"
+            android:text="0000000"
             android:textColor="#80222222"
             android:textSize="11dp" />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="170dp"
-            android:text="u6135205@au.edu"
+            android:text="u000000@au.edu"
             android:textColor="#80222222"
             android:textSize="11dp" />
 

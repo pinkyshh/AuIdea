@@ -9,7 +9,7 @@
         android:id="@+id/homeActivity"
         android:name="lipika.androidapp.gridlayoutadvisor.HomeActivity"
         android:label="HomeActivity"
-        tools:layout="@layout/activity_home"/>
+        tools:layout="@layout/activity_recommend"/>
 
     <activity
         android:id="@+id/testActivity"
