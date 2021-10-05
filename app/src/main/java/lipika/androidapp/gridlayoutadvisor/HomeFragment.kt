@@ -1,31 +1,19 @@
 package lipika.androidapp.gridlayoutadvisor
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.AllApi
 import api.HomeProject
 import api.HomeProjectItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_recommend.*
-import kotlinx.android.synthetic.main.activity_recommend.bottom_navigation_view
-import kotlinx.android.synthetic.main.activity_recommend.recyclerView
-import kotlinx.android.synthetic.main.profile_popup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,29 +22,26 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val REQUEST_CODE=102
 private const val REQUEST_CODE1=103
-private const val REQUEST_CODE_SECONDACT=101
 
-class HomeActivity : AppCompatActivity() {
+class HomeFragment: Fragment() {
 
     private var list: HomeProject = HomeProject()
     private lateinit var listAdapter: ProjectAdapter
-    lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var auth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.activity_home,container, false)
+        return view
+    }
 
-        auth = Firebase.auth
-
-        val top_fragment=TopFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.topContainerView, top_fragment).commit()
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
         listAdapter = ProjectAdapter(list)
         recyclerView.adapter = listAdapter
-
-        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
@@ -81,66 +66,6 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("SPARK-API","Failed to Request!")
             }
         })
-
-//        logoutButton.setOnClickListener {
-////            Log.i(LoginActivity.TAG, "Logout")
-////            auth.signOut()
-//            FirebaseAuth.getInstance().signOut();
-//            val logoutIntent = Intent(this, LoginActivity::class.java)
-//            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(logoutIntent)
-//            finish()
-//        }
-
-
-        //Image button intent
-        val button: ImageButton = findViewById(R.id.aboutButton)
-        button.setOnClickListener{
-            val intent = Intent (this, AboutActivity::class.java)
-            startActivity(intent)
-//            intent.putExtra("NAME", intent)
-//            startActivityForResult(intent, REQUEST_CODE_SECONDACT)
-        }
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when(item.itemId) {
-            R.id.homeActivity -> {
-                replaceFragment(HomeFragment())
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.recommendActivity -> {
-                replaceFragment(RecommendActivity())
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.navAdvisor -> {
-                replaceFragment(AdvisorFragment())
-                return@OnNavigationItemSelectedListener true
-
-            }
-            R.id.navProfile -> {
-                replaceFragment(ProfileFragment())
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
     }
 
     private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
@@ -245,5 +170,4 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
 }

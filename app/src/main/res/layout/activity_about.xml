@@ -206,7 +206,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="lipika.androidapp.about.PreFragment"
+            class = "lipika.androidapp.gridlayoutadvisor.PreFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/linearLayout"

@@ -13,12 +13,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="164dp"
         android:layout_weight="1"
-        android:src="@drawable/profile_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/profile_photo" />
+        tools:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/appName"

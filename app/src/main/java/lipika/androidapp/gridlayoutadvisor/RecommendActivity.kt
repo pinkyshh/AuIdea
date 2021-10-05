@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.AllApi
@@ -32,24 +34,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val REQUEST_CODE=102
 private const val REQUEST_CODE1=103
 
-class RecommendActivity : AppCompatActivity() {
+class RecommendActivity : Fragment() {
 
     private var list:Recommendation = Recommendation()
     private lateinit var listAdapter: ProjectAdapter
-    lateinit var toggle:ActionBarDrawerToggle
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recommend)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.activity_recommend,container, false)
+        return view
+    }
 
-        val top_fragment=TopFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.topContainerView, top_fragment).commit()
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
         listAdapter = ProjectAdapter(list)
         recyclerView.adapter = listAdapter
-
-        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
@@ -62,59 +65,24 @@ class RecommendActivity : AppCompatActivity() {
         val getRecommendationRequest: Call<Recommendation> = Api.getRecommendation()
         getRecommendationRequest.enqueue(object : Callback<Recommendation> {
 
-            override fun onResponse(call: Call<Recommendation>, response: Response<Recommendation>) {
+            override fun onResponse(
+                call: Call<Recommendation>,
+                response: Response<Recommendation>
+            ) {
                 var recommendationResponse = response.body()
-                if (recommendationResponse!=null) {
+                if (recommendationResponse != null) {
                     listAdapter.setData(recommendationResponse)
                     Log.d("SPARK-API", recommendationResponse.toString())
                 }
             }
 
             override fun onFailure(call: Call<Recommendation>, t: Throwable) {
-                Log.d("SPARK-API","Failed to Request!")
+                Log.d("SPARK-API", "Failed to Request!")
             }
         })
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when(item.itemId) {
-            R.id.navAdvisor -> {
-                replaceFragment(AdvisorFragment())
-                return@OnNavigationItemSelectedListener true
-
-            }
-            R.id.navProfile -> {
-                replaceFragment(ProfileFragment())
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
-
-    private fun sampleProject():ArrayList<Project> {
-        val studentList = ArrayList<Project>()
-        studentList.add(Project(2, "A case study of the indoor performance of Bluetooth Smart with Raspberry Pi 3", "The Final Fight", "2/2016", "Senior Project 1"))
-        studentList.add(Project(2, "Using data analytics to predict student performance for recommended courses", "Reverse", "2/2016", "Senior Project 2"))
-        studentList.add(Project(2, "Using data analytics to predict student performance for recommended courses", "Reverse", "2/2016", "Senior Project 2"))
-        studentList.add(Project(1, "A case study of the indoor performance of Bluetooth Smart with Raspberry Pi 3", "The Final Fight", "2/2016", "Senior Project 1"))
-        studentList.add(Project(1, "A case study of the indoor performance of Bluetooth Smart with Raspberry Pi 3", "The Final Fight", "2/2016", "Senior Project 1"))
-
-        return studentList
-    }
 
     private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
         var p_name: TextView = itemView.findViewById(R.id.nameSP1)
