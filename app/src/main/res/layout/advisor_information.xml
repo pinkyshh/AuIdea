@@ -19,8 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_top" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <RadioGroup
+        android:id="@+id/advisorRadio"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:background="#FAFAFA"
@@ -31,32 +31,36 @@
         app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView">
 
 
-        <Button
+        <RadioButton
             android:id="@+id/specButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#FAFAFA"
+            android:button="@color/transparent"
             android:fontFamily="@font/cabin"
             android:text="Specialty"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="23sp" />
 
 
-        <Button
+        <RadioButton
             android:id="@+id/projButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="47dp"
             android:layout_weight="1"
             android:background="#FAFAFA"
+            android:button="@color/transparent"
             android:fontFamily="@font/cabin"
             android:text="Projects"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="23sp" />
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
-        android:id="@+id/kwanDesc"
+        android:id="@+id/advisorNameInfo"
         android:layout_width="275dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
@@ -64,15 +68,15 @@
         android:fontFamily="@font/cabin_bold"
         android:text="Asst. Prof. Dr. Dobri Atanassov Batovski"
         android:textColor="#333232"
-        android:textSize="17sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.197"
-        app:layout_constraintStart_toEndOf="@+id/imageKwan2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toEndOf="@+id/imageAdvisor"
+        app:layout_constraintTop_toBottomOf="@+id/advisorRadio" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageKwan2"
+        android:id="@+id/imageAdvisor"
         android:layout_width="52dp"
         android:layout_height="49dp"
         android:layout_marginStart="32dp"
@@ -80,11 +84,11 @@
         android:layout_weight="1"
         android:src="@drawable/dobri"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/advisorRadio" />
 
     <View
         android:id="@+id/divides"
-        android:layout_width="365dp"
+        android:layout_width="340dp"
         android:layout_height="2dp"
         android:layout_marginLeft="10sp"
         android:layout_marginTop="8dp"
@@ -92,20 +96,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.347"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kwanDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/advisorNameInfo" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerViewAdvisor"
         android:name="lipika.androidapp.gridlayoutadvisor.specialRecyclerFragment"
-        android:layout_width="407dp"
-        android:layout_height="524dp"
+        android:layout_width="404dp"
+        android:layout_height="561dp"
         android:layout_marginStart="1dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kwanDesc"
+        app:layout_constraintTop_toBottomOf="@+id/advisorNameInfo"
         app:layout_constraintVertical_bias="1.0"
         tools:layout="@layout/fragment_special_recycler" />
 

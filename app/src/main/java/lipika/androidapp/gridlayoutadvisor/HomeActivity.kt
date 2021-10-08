@@ -1,5 +1,7 @@
 package lipika.androidapp.gridlayoutadvisor
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +9,8 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
@@ -21,27 +23,53 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_recommend.*
 import kotlinx.android.synthetic.main.activity_recommend.bottom_navigation_view
-import kotlinx.android.synthetic.main.activity_recommend.recyclerView
+import kotlinx.android.synthetic.main.activity_recommend.saveRecyclerView
+import kotlinx.android.synthetic.main.item_container_sp1.view.*
+import kotlinx.android.synthetic.main.item_container_sp2.view.*
 import kotlinx.android.synthetic.main.profile_popup.*
+import kotlinx.android.synthetic.main.project_detail.view.*
+import kotlinx.android.synthetic.main.project_detail.view.color_bar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.Serializable
 
 private const val REQUEST_CODE=102
 private const val REQUEST_CODE1=103
 private const val REQUEST_CODE_SECONDACT=101
+private lateinit var auth: FirebaseAuth
+
 
 class HomeActivity : AppCompatActivity() {
+var saveStorage = mutableListOf<Array<String>>()
+    private companion object{
+        private const val TAG = "LoginActivity"
+    }
 
-    private var list: HomeProject = HomeProject()
+    private var list: ArrayList<HomeProjectItem> = ArrayList<HomeProjectItem>()
     private lateinit var listAdapter: ProjectAdapter
+
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var auth: FirebaseAuth
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode!= Activity.RESULT_OK){
+            return
+        }
+        if (requestCode == REQUEST_CODE_SECONDACT){
+            if(data != null){
+                data.getStringArrayExtra("SAVED")?.let{saveStorage.add(it)}
+                Log.d("CHECK",saveStorage.toString())
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +77,13 @@ class HomeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        val top_fragment=TopFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.topContainerView, top_fragment).commit()
+        val top_fragment = TopFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.topContainerView, top_fragment)
+            .commit()
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        listAdapter = ProjectAdapter(list)
-        recyclerView.adapter = listAdapter
+        saveRecyclerView.layoutManager = LinearLayoutManager(this)
+        listAdapter = ProjectAdapter(emptyList())
+        saveRecyclerView.adapter = listAdapter
 
         bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
@@ -71,38 +100,53 @@ class HomeActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<HomeProject>, response: Response<HomeProject>) {
                 var projectResponse = response.body()
-                if (projectResponse!=null) {
+                if (projectResponse != null) {
                     listAdapter.setData(projectResponse)
                     Log.d("SPARK-API", projectResponse.toString())
                 }
             }
 
             override fun onFailure(call: Call<HomeProject>, t: Throwable) {
-                Log.d("SPARK-API","Failed to Request!")
+                Log.d("SPARK-API", "Failed to Request!")
             }
         })
 
-//        logoutButton.setOnClickListener {
-////            Log.i(LoginActivity.TAG, "Logout")
-////            auth.signOut()
-//            FirebaseAuth.getInstance().signOut();
-//            val logoutIntent = Intent(this, LoginActivity::class.java)
-//            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(logoutIntent)
-//            finish()
-//        }
-
-
-        //Image button intent
-        val button: ImageButton = findViewById(R.id.aboutButton)
-        button.setOnClickListener{
-            val intent = Intent (this, AboutActivity::class.java)
-            startActivity(intent)
-//            intent.putExtra("NAME", intent)
-//            startActivityForResult(intent, REQUEST_CODE_SECONDACT)
+        //Save image intent
+        val save: ImageView = findViewById(R.id.savedIcon)
+        save.setOnClickListener {
+            Log.d("MENU","Favourite")
+            val intent3 = Intent(this, SaveActivity::class.java)
+            intent3.putExtra("SAVEDLIST", ArrayList(saveStorage))
+            startActivity(intent3)
         }
 
+        //Filter button intent
+        val filter: ImageView = findViewById(R.id.filterIcon)
+        filter.setOnClickListener {
+            val intent = Intent(this, FilterActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        //About button intent
+        val button: ImageButton = findViewById(R.id.aboutButton)
+        button.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
+        //Logout
+//       val btn_logout = findViewById(R.id.logoutButton) as Button
+//        btn_logout.setOnClickListener {
+//            Log.i(TAG, "Logout")
+//                auth.signOut()
+//                val logoutIntent = Intent(this, LoginActivity::class.java)
+//                logoutIntent.flags =
+//                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                startActivity(logoutIntent)
+//                finish()
+//        }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
@@ -143,7 +187,7 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView){
         var p_name: TextView = itemView.findViewById(R.id.nameSP1)
         var g_name: TextView = itemView.findViewById(R.id.grpSP1)
         var sem: TextView = itemView.findViewById(R.id.semSP1)
@@ -151,79 +195,49 @@ class HomeActivity : AppCompatActivity() {
 
         lateinit var project: HomeProjectItem
 
-        init {
-            itemView.setOnClickListener(this)
-        }
-
         fun bind(project: HomeProjectItem){
-            this.project=project
+            this.project = project
             p_name.text = (project.projectTitle)
             g_name.setText(project.groupName)
             sem.text = (project.semester)
             type.text = ("Senior Project " + project.projectType.toString())
-        }
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ProjectDetail::class.java)
 
-        override fun onClick(v: View?) {
-            val intent= Intent (v!!.context, ProjectDetail::class.java)
-            intent.putExtra("p_name",project.projectTitle)
-            intent.putExtra("g_name",project.groupName)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.projectType)
-
-            startActivityForResult(intent, REQUEST_CODE)
-        }
-    }
-
-    private inner class View2Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        var p_name: TextView = itemView.findViewById(R.id.nameSP2)
-        var g_name: TextView = itemView.findViewById(R.id.grpSP2)
-        var sem: TextView = itemView.findViewById(R.id.semSP2)
-        var type: TextView = itemView.findViewById(R.id.SP2)
-
-        lateinit var project: Project
-
-        fun bind(project: HomeProjectItem){
-            p_name.text = (project.projectTitle)
-            g_name.setText(project.groupName)
-            sem.text = (project.semester)
-            type.text = ("Senior Project " + project.projectType.toString())
-
-        }
-
-        override fun onClick(v: View?) {
-            val intent= Intent(v!!.context,ProjectDetail::class.java)
-            intent.putExtra("p_name",project.project_name)
-            intent.putExtra("g_name",project.group_name)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.viewType)
-
-            startActivityForResult(intent, REQUEST_CODE1)
+                intent.putExtra("p_number", project.projectNo.toString())
+                intent.putExtra("TITLE", project.projectTitle.toString())
+                intent.putExtra("SEM", project.semester.toString())
+                intent.putExtra("TYPE", project.projectType.toString())
+                Log.d("SPARK-API","Working ${project.projectNo}")
+                startActivityForResult(intent, REQUEST_CODE_SECONDACT)
+            }
         }
     }
 
-    private inner class ProjectAdapter(var projects: HomeProject):
+    private inner class ProjectAdapter(var projects: List<HomeProjectItem>):
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var seniorProject1=1
         var seniorProject2=2
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            if (viewType==seniorProject1) {
-                val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
-                return View1Holder(View1)
-            } else {
-                val View2=layoutInflater.inflate(R.layout.item_container_sp2,parent,false)
-                return View2Holder(View2)
-            }
+            val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
+
+            //For Text
+            View1.SP1.setTextColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+                resources.getColor(R.color.SP2))
+
+            //For color bar
+            View1.color_bar.setBackgroundColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+                resources.getColor(R.color.SP2))
+
+            return View1Holder(View1)
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val project = projects[position]
-            if (project.projectType == 1) {
-                (holder as View1Holder).bind(project)
-            } else {
-                (holder as View2Holder).bind(project)
-            }
-
+            (holder as View1Holder).bind(project)
         }
 
         override fun getItemCount(): Int {
@@ -239,11 +253,9 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        fun setData(project: HomeProject) {
+        fun setData(project: List<HomeProjectItem>) {
             projects = project
             notifyDataSetChanged()
         }
-
     }
-
 }

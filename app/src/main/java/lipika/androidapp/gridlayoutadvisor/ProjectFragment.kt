@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_advisor_project.*
-import kotlinx.android.synthetic.main.save_screen.*
 
 private const val REQUEST_CODE11=100
 private const val REQUEST_CODE22=101

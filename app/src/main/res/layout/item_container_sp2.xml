@@ -69,12 +69,11 @@
             android:textStyle="bold"
             android:text="Senior Project 2" />
 
-        <FrameLayout
+        <TextView
             android:id="@+id/color_bar2"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:layout_marginTop="138dp"
-            android:background="@drawable/sp2_bar" />
+            android:layout_marginTop="138dp" />
 
 <!--    </LinearLayout>-->
 

@@ -14,6 +14,8 @@ import api.AllApi
 import api.HomeProject
 import api.HomeProjectItem
 import kotlinx.android.synthetic.main.activity_recommend.*
+import kotlinx.android.synthetic.main.item_container_sp1.view.*
+import kotlinx.android.synthetic.main.item_container_sp1.view.color_bar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,9 +41,10 @@ class HomeFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        saveRecyclerView.layoutManager = LinearLayoutManager(activity)
         listAdapter = ProjectAdapter(list)
-        recyclerView.adapter = listAdapter
+        saveRecyclerView.adapter = listAdapter
 
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
@@ -56,19 +59,20 @@ class HomeFragment: Fragment() {
 
             override fun onResponse(call: Call<HomeProject>, response: Response<HomeProject>) {
                 var projectResponse = response.body()
-                if (projectResponse!=null) {
+                if (projectResponse != null) {
                     listAdapter.setData(projectResponse)
                     Log.d("SPARK-API", projectResponse.toString())
                 }
             }
 
             override fun onFailure(call: Call<HomeProject>, t: Throwable) {
-                Log.d("SPARK-API","Failed to Request!")
+                Log.d("SPARK-API", "Failed to Request!")
             }
         })
+
     }
 
-    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView){
         var p_name: TextView = itemView.findViewById(R.id.nameSP1)
         var g_name: TextView = itemView.findViewById(R.id.grpSP1)
         var sem: TextView = itemView.findViewById(R.id.semSP1)
@@ -76,53 +80,18 @@ class HomeFragment: Fragment() {
 
         lateinit var project: HomeProjectItem
 
-        init {
-            itemView.setOnClickListener(this)
-        }
-
         fun bind(project: HomeProjectItem){
             this.project=project
             p_name.text = (project.projectTitle)
             g_name.setText(project.groupName)
             sem.text = (project.semester)
             type.text = ("Senior Project " + project.projectType.toString())
-        }
-
-        override fun onClick(v: View?) {
-            val intent= Intent (v!!.context, ProjectDetail::class.java)
-            intent.putExtra("p_name",project.projectTitle)
-            intent.putExtra("g_name",project.groupName)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.projectType)
-
-            startActivityForResult(intent, REQUEST_CODE)
-        }
-    }
-
-    private inner class View2Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        var p_name: TextView = itemView.findViewById(R.id.nameSP2)
-        var g_name: TextView = itemView.findViewById(R.id.grpSP2)
-        var sem: TextView = itemView.findViewById(R.id.semSP2)
-        var type: TextView = itemView.findViewById(R.id.SP2)
-
-        lateinit var project: Project
-
-        fun bind(project: HomeProjectItem){
-            p_name.text = (project.projectTitle)
-            g_name.setText(project.groupName)
-            sem.text = (project.semester)
-            type.text = ("Senior Project " + project.projectType.toString())
-
-        }
-
-        override fun onClick(v: View?) {
-            val intent= Intent(v!!.context,ProjectDetail::class.java)
-            intent.putExtra("p_name",project.project_name)
-            intent.putExtra("g_name",project.group_name)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.viewType)
-
-            startActivityForResult(intent, REQUEST_CODE1)
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ProjectDetail::class.java)
+                intent.putExtra("p_number", project.projectNo.toString())
+                Log.d("SPARK-API","ABCD ${project.projectNo}")
+                startActivity(intent)
+            }
         }
     }
 
@@ -132,23 +101,24 @@ class HomeFragment: Fragment() {
         var seniorProject2=2
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            if (viewType==seniorProject1) {
-                val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
-                return View1Holder(View1)
-            } else {
-                val View2=layoutInflater.inflate(R.layout.item_container_sp2,parent,false)
-                return View2Holder(View2)
-            }
+            val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
+
+            //For Text
+            View1.SP1.setTextColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+                resources.getColor(R.color.SP2))
+
+            //For color bar
+            View1.color_bar.setBackgroundColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+                resources.getColor(R.color.SP2))
+
+            return View1Holder(View1)
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val project = projects[position]
-            if (project.projectType == 1) {
-                (holder as View1Holder).bind(project)
-            } else {
-                (holder as View2Holder).bind(project)
-            }
-
+            (holder as View1Holder).bind(project)
         }
 
         override fun getItemCount(): Int {
@@ -168,6 +138,5 @@ class HomeFragment: Fragment() {
             projects = project
             notifyDataSetChanged()
         }
-
     }
 }

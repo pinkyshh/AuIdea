@@ -21,16 +21,24 @@ class AboutActivity : AppCompatActivity() {
 
         radioGroup.setOnCheckedChangeListener{group,checkedId ->
             if (checkedId == R.id.pre) {
-                pre.setBackgroundColor(R.drawable.unselector_tag_button_post)
-                post.setBackgroundColor(R.drawable.border)
-                val post_fragment = PostFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, post_fragment).commit()
+                pre.setOnClickListener {
+                    val pre_fragment = PreFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, pre_fragment).commit()
+                    pre.setBackgroundDrawable(getDrawable(R.drawable.selector_tag_button_post))
+                    post.setBackgroundDrawable(getDrawable(R.drawable.unselector_tag_button_post))
+
+                }
 
             } else {
-                post.setBackgroundColor(R.drawable.unselector_tag_button_post)
-                pre.setBackgroundColor(R.drawable.border)
-                val pre_fragment = PreFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, pre_fragment).commit()
+                post.setOnClickListener {
+                    val post_fragment = PostFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, post_fragment).commit()
+                    post.setBackgroundDrawable(getDrawable(R.drawable.selector_tag_button_post))
+                    pre.setBackgroundDrawable(getDrawable(R.drawable.unselector_tag_button_post))
+
+                }
             }
         }
     }

@@ -1,30 +1,21 @@
 package lipika.androidapp.gridlayoutadvisor
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import api.AllApi
 import api.Recommendation
 import api.RecommendationItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_recommend.*
-import kotlinx.android.synthetic.main.activity_recommend.bottom_navigation_view
-import kotlinx.android.synthetic.main.activity_recommend.recyclerView
-import kotlinx.android.synthetic.main.advisor_information.*
-import kotlinx.android.synthetic.main.slidable_menu.*
+import kotlinx.android.synthetic.main.activity_recommend.saveRecyclerView
+import kotlinx.android.synthetic.main.item_container_sp1.view.*
+import kotlinx.android.synthetic.main.project_detail.view.color_bar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +27,7 @@ private const val REQUEST_CODE1=103
 
 class RecommendActivity : Fragment() {
 
-    private var list:Recommendation = Recommendation()
+    private var list: Recommendation = Recommendation()
     private lateinit var listAdapter: ProjectAdapter
 
     override fun onCreateView(
@@ -50,9 +41,9 @@ class RecommendActivity : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        saveRecyclerView.layoutManager = LinearLayoutManager(activity)
         listAdapter = ProjectAdapter(list)
-        recyclerView.adapter = listAdapter
+        saveRecyclerView.adapter = listAdapter
 
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
@@ -84,7 +75,7 @@ class RecommendActivity : Fragment() {
     }
 
 
-    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+    private inner class View1Holder(itemView: View): RecyclerView.ViewHolder(itemView){
         var p_name: TextView = itemView.findViewById(R.id.nameSP1)
         var g_name: TextView = itemView.findViewById(R.id.grpSP1)
         var sem: TextView = itemView.findViewById(R.id.semSP1)
@@ -92,56 +83,20 @@ class RecommendActivity : Fragment() {
 
         lateinit var project: RecommendationItem
 
-        init {
-            itemView.setOnClickListener(this)
-        }
-
         fun bind(project: RecommendationItem){
             this.project=project
             p_name.text = (project.projectTitle)
             g_name.setText(project.groupName)
             sem.text = (project.semester)
             type.text = ("Senior Project " + project.projectType.toString())
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, ProjectDetail::class.java)
+                intent.putExtra("p_number", project.projectNo.toString())
+                Log.d("SPARK-API","The project number for this is ${project.projectNo}")
+                startActivity(intent)
+            }
         }
 
-        override fun onClick(v: View?) {
-            val intent= Intent (v!!.context, ProjectDetail::class.java)
-            intent.putExtra("p_name",project.projectTitle)
-            intent.putExtra("g_name",project.groupName)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.projectType)
-
-            startActivityForResult(intent, REQUEST_CODE)
-        }
-
-
-    }
-
-    private inner class View2Holder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        var p_name: TextView = itemView.findViewById(R.id.nameSP2)
-        var g_name: TextView = itemView.findViewById(R.id.grpSP2)
-        var sem: TextView = itemView.findViewById(R.id.semSP2)
-        var type: TextView = itemView.findViewById(R.id.SP2)
-
-        lateinit var project: Project
-
-        fun bind(project: RecommendationItem){
-            p_name.text = (project.projectTitle)
-            g_name.setText(project.groupName)
-            sem.text = (project.semester)
-            type.text = ("Senior Project " + project.projectType.toString())
-
-        }
-
-        override fun onClick(v: View?) {
-            val intent=Intent(v!!.context,ProjectDetail::class.java)
-            intent.putExtra("p_name",project.project_name)
-            intent.putExtra("g_name",project.group_name)
-            intent.putExtra("sem",project.semester)
-            intent.putExtra("type",project.viewType)
-
-            startActivityForResult(intent, REQUEST_CODE1)
-        }
     }
 
     private inner class ProjectAdapter(var projects:Recommendation):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -149,23 +104,24 @@ class RecommendActivity : Fragment() {
         var seniorProject2=2
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            if (viewType==seniorProject1) {
-                val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
-                return View1Holder(View1)
-            } else {
-                val View2=layoutInflater.inflate(R.layout.item_container_sp2,parent,false)
-                return View2Holder(View2)
-            }
+            val View1=layoutInflater.inflate(R.layout.item_container_sp1,parent,false)
+
+            //For Text
+            View1.SP1.setTextColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+             resources.getColor(R.color.SP2))
+
+            //For color bar
+            View1.color_bar.setBackgroundColor(if (viewType==seniorProject1) resources.getColor(R.color.SP1)
+            else
+                resources.getColor(R.color.SP2))
+
+            return View1Holder(View1)
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val project=projects[position]
-            if (project.projectType==1) {
-                (holder as View1Holder).bind(project)
-            } else {
-                (holder as View2Holder).bind(project)
-            }
-
+            val project = projects[position]
+            (holder as View1Holder).bind(project)
         }
 
         override fun getItemCount(): Int {
@@ -181,7 +137,7 @@ class RecommendActivity : Fragment() {
             }
         }
 
-        fun setData(project:Recommendation) {
+        fun setData(project: Recommendation) {
             projects = project
             notifyDataSetChanged()
         }

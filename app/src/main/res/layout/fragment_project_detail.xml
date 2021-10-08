@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/cabin_semibold"
         android:lineSpacingExtra="5dp"
-        android:text="The project deals with an experimental study using Raspberry Pi 3 of the indoor transmission performance of Bluetooth low energy (BLE, also known as Bluetooth Smart) as compared to the classic Bluetooth technology. Note: This is a TS topic."
+        android:text=" "
         android:textColor="#666666"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -2,24 +2,23 @@ package api
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AllApi {
 
-//    @GET("project/list?id=1111")
-//    fun getAdvisor(): Call<Lipika>
-//
-//    @GET("advisor/detail")
-//    fun getAll():Call<AllAdvisorResponse>
-
-    @GET("api/recommendation/getprojectinfo?projectno=111")
-    fun getProject():Call<ProjectResponse>
+    @GET("api/recommendation/projectdetail")
+    fun getProject(@Query("projectNo") p_number:String):Call<ProjectResponse>
 
     @GET("api/Recommendation/GetRecommendProject?studentId=6135102")
     fun getRecommender():Call<RecommendedResponse>
 
-    @GET("api/recommendation/home?studentid=5515257")
+    @GET("api/recommendation/recommendationall")
     fun getRecommendation():Call<Recommendation>
 
     @GET("api/recommendation/search")
     fun getHomeProject():Call<HomeProject>
+
+    @GET("api/recommendation/advisor")
+    fun getAdvisor():Call<AdvisorResponse>
 }
