@@ -1,16 +1,24 @@
 package lipika.androidapp.gridlayoutadvisor
 
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import api.AllApi
 import api.HomeProject
 import api.ProjectResponse
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.fragment_project_detail.*
+import kotlinx.android.synthetic.main.fragment_project_detail.view.*
+import kotlinx.android.synthetic.main.profile_popup.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +30,8 @@ private const val ARG_PARAM1 = "param1"
 class ProjectDesFragment: Fragment() {
 
     var param1=""
+
+    var mydownloadid : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +72,12 @@ class ProjectDesFragment: Fragment() {
             }
         })
 
+        view.downloadButton.setOnClickListener{
+            Log.d("logout clicked", "Selected")
+            val intent = Intent(activity, ProjectDetail::class.java)
+            startActivity(intent)
+        }
         return view
-
-
     }
 
     override fun onStart() {

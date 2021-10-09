@@ -1,16 +1,22 @@
 package lipika.androidapp.gridlayoutadvisor
 
 import android.app.Activity
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import api.AllApi
 import api.HomeProject
 import api.ProjectResponse
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.advisor_information.*
+import kotlinx.android.synthetic.main.fragment_project_detail.*
 import kotlinx.android.synthetic.main.project_detail.*
 import kotlinx.android.synthetic.main.project_detail.color_bar
 import retrofit2.Call
@@ -18,12 +24,43 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Url
+
 
 class ProjectDetail : AppCompatActivity() {
+
+    var mydownloadid: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.project_detail)
 
+//        Download Manager
+        var request = DownloadManager.Request(
+            Uri.parse("https://atmiyauni.ac.in/wp-content/uploads/2020/04/AU-Brochure-update-March-2020.pdf"))
+            .setTitle("Senior Project Report")
+            .setDescription("Senior Project Report Downloading")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setAllowedOverMetered(true)
+
+        var dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        mydownloadid = dm.enqueue(request)
+
+        var br = object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent?) {
+                var id = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                if (id == mydownloadid) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Download Completed",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+        registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+//      Api & Recycler
         var title = intent.getStringExtra("TITLE")
         var name = intent.getStringExtra("GRP")
         var semes = intent.getStringExtra("SEM")

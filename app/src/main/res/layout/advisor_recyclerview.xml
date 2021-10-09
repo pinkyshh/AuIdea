@@ -67,7 +67,7 @@ app:layout_constraintStart_toStartOf="parent"
 app:menu="@menu/bottom_nav" >
 
 <ImageButton
-    android:id="@+id/downloadButton"
+    android:id="@+id/aboutButton"
     android:layout_width="63dp"
     android:layout_height="61dp"
     android:layout_gravity="center_horizontal"
