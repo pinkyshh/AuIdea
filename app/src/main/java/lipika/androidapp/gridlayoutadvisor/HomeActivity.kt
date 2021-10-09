@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -48,8 +49,8 @@ private lateinit var auth: FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
 var saveStorage = mutableListOf<Array<String>>()
-    private companion object{
-        private const val TAG = "LoginActivity"
+    companion object{
+        const val TAG = "LoginActivity"
     }
 
     private var list: ArrayList<HomeProjectItem> = ArrayList<HomeProjectItem>()
@@ -134,17 +135,6 @@ var saveStorage = mutableListOf<Array<String>>()
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
-        //Logout
-//       val btn_logout = findViewById(R.id.logoutButton) as Button
-//        btn_logout.setOnClickListener {
-//            Log.i(TAG, "Logout")
-//                auth.signOut()
-//                val logoutIntent = Intent(this, LoginActivity::class.java)
-//                logoutIntent.flags =
-//                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                startActivity(logoutIntent)
-//                finish()
-//        }
     }
 
 

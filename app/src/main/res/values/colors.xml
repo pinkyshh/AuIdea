@@ -26,4 +26,6 @@
 
     <color name ="blue">#027182</color>
     <color name = "purple">#A483BD</color>
+    <color name = "statusbar">#FAFAFA</color>
+
 </resources>
