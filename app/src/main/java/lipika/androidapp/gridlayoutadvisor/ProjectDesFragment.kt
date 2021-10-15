@@ -1,8 +1,10 @@
 package lipika.androidapp.gridlayoutadvisor
 
 import android.app.DownloadManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,15 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import api.AllApi
 import api.HomeProject
 import api.ProjectResponse
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.android.synthetic.main.fragment_project_detail.*
 import kotlinx.android.synthetic.main.fragment_project_detail.view.*
-import kotlinx.android.synthetic.main.profile_popup.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,8 +32,6 @@ class ProjectDesFragment: Fragment() {
 
     var param1=""
 
-    var mydownloadid : Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,7 +39,6 @@ class ProjectDesFragment: Fragment() {
             param1 = it.getString(ARG_PARAM1).toString()
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +52,7 @@ class ProjectDesFragment: Fragment() {
             ).build()
 
         val Api: AllApi = retrofit.create(AllApi::class.java)
+
 
 //        Get Project Description
         val getProjectRequest: Call<ProjectResponse> = Api.getProject(param1)
@@ -73,8 +72,8 @@ class ProjectDesFragment: Fragment() {
         })
 
         view.downloadButton.setOnClickListener{
-            Log.d("logout clicked", "Selected")
-            val intent = Intent(activity, ProjectDetail::class.java)
+            Log.d("Download", "Download clicked")
+            val intent = Intent(activity, DownloadActivity::class.java)
             startActivity(intent)
         }
         return view

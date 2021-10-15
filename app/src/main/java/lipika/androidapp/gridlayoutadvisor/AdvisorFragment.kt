@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import api.AdvisorResponse
-import api.AdvisorResponseItem
-import api.AllApi
+import api.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.advisor_grid.*
 import kotlinx.android.synthetic.main.advisor_grid.view.*
+import kotlinx.android.synthetic.main.project_detail.*
+import kotlinx.android.synthetic.main.project_detail.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,8 +59,8 @@ class AdvisorFragment: Fragment() {
         val Api: AllApi = retrofit.create(AllApi::class.java)
 
 //        Get Advisor Recycler
-        val getProjectRequest: Call<AdvisorResponse> = Api.getAdvisor()
-        getProjectRequest.enqueue(object : Callback<AdvisorResponse> {
+        val getAdvisorRequest: Call<AdvisorResponse> = Api.getAdvisor()
+        getAdvisorRequest.enqueue(object : Callback<AdvisorResponse> {
 
             override fun onResponse(call: Call<AdvisorResponse>, response: Response<AdvisorResponse>) {
                 var advisorResponse = response.body()
@@ -75,21 +76,6 @@ class AdvisorFragment: Fragment() {
         })
     }
 
-//    private fun advisorList() : ArrayList<advisor> {
-//        val advisor=ArrayList<advisor>()
-//        advisor.add(advisor(R.drawable.dobri, "Dr. Dobri Atanassov Batovski", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.tap, "Tapanan Yeophantong", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.anil, "Dr.Anil Kumar GopalKrishna G", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.paitoon, "Paitoon Porntakroon", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.rachsuda, "Rachsuda Sethawong", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.darun, "Darun Kesarat", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.songsak, "Dr. Songsak Channarukul", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.kwan, "Dr. Kwan Nongpong", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.chayapol, "Chayapol Moemeng", "Asst Prof"))
-//        advisor.add(advisor(R.drawable.thanachai, "Dr. Thanachai Thumthawatworn", "Asst prof"))
-//
-//        return advisor
-//    }
 
 
     private inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -103,19 +89,22 @@ class AdvisorFragment: Fragment() {
             this.advisor = advisor
             Picasso.get().load(advisor.advisorImage).into(image)
             name.text = (advisor.advisorName)
+            val specialList=advisor.advisorSpecialty.map { it.specialty }.joinToString("/")
 
             itemView.viewAdvisorButtonGrid.setOnClickListener {
                 val intent = Intent(viewAdvisorButtonGrid.context, SecondActivity::class.java)
+                intent.putExtra("a_number",advisor.advisorId)
+                intent.putExtra("special",specialList)
                 intent.putExtra("image",advisor.advisorImage)
                 intent.putExtra("name",advisor.advisorName)
-                Log.d("SPARK-API","ABCD ${advisor.advisorId}")
+                Log.d("ADVISOR","ABCD ${advisor.advisorId}")
 
                 startActivityForResult(intent, REQUESTCODE)
             }
         }
     }
 
-    private inner class RecyclerViewAdapter(var advisors: AdvisorResponse) :
+    private inner class RecyclerViewAdapter(var advisors: List<AdvisorResponseItem>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -134,7 +123,7 @@ class AdvisorFragment: Fragment() {
             return advisors.size
         }
 
-        fun setData(advisor: AdvisorResponse) {
+        fun setData(advisor: List<AdvisorResponseItem>) {
             advisors = advisor
             notifyDataSetChanged()
         }

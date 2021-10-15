@@ -11,21 +11,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import api.AllApi
 import api.HomeProject
 import api.ProjectResponse
+import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.advisor_information.*
 import kotlinx.android.synthetic.main.fragment_project_detail.*
+import kotlinx.android.synthetic.main.item_container_sp1.*
+import kotlinx.android.synthetic.main.item_container_sp1.view.*
 import kotlinx.android.synthetic.main.project_detail.*
-import kotlinx.android.synthetic.main.project_detail.color_bar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Url
-
 
 class ProjectDetail : AppCompatActivity() {
 
@@ -35,32 +37,7 @@ class ProjectDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.project_detail)
 
-//        Download Manager
-        var request = DownloadManager.Request(
-            Uri.parse("https://atmiyauni.ac.in/wp-content/uploads/2020/04/AU-Brochure-update-March-2020.pdf"))
-            .setTitle("Senior Project Report")
-            .setDescription("Senior Project Report Downloading")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-            .setAllowedOverMetered(true)
-
-        var dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        mydownloadid = dm.enqueue(request)
-
-        var br = object : BroadcastReceiver() {
-            override fun onReceive(p0: Context?, p1: Intent?) {
-                var id = p1?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-                if (id == mydownloadid) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Download Completed",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
-        }
-        registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-
-//      Api & Recycler
+        //Api and Recycler
         var title = intent.getStringExtra("TITLE")
         var name = intent.getStringExtra("GRP")
         var semes = intent.getStringExtra("SEM")
@@ -74,11 +51,12 @@ class ProjectDetail : AppCompatActivity() {
         val Api: AllApi = retrofit.create(AllApi::class.java)
         val projectNumber = intent.getStringExtra("p_number")
 
-        if (projectNumber == "1") {
-            color_bar.setTextColor(resources.getColor(R.color.SP1))
-        } else if (projectNumber == "2") {
-            resources.getColor(R.color.SP2)
-        }
+        val project_detail = ProjectDesFragment.newInstance(projectNumber.toString())
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, project_detail).commit()
+            description.setTextColor(resources.getColor(R.color.menuColor))
+            team.setTextColor(resources.getColor(R.color.colorPrimaryLight))
+
 
 //        Get Project Detail
         val getProjectRequest: Call<ProjectResponse> = Api.getProject(projectNumber.toString())
@@ -97,7 +75,15 @@ class ProjectDetail : AppCompatActivity() {
                     name = projectResponse[0].groupName
                     projName.text = projectResponse[0].projectTitle
                     title = projectResponse[0].projectTitle
-                    Log.d("SPARK-API", projectResponse.toString())
+                    Log.d("SPARK-API", projectResponse[0].projectType.toString())
+
+                    // For Color bar
+                    if (projectResponse[0].projectType.toString() == "1") {
+                        color_bar_d.setBackgroundColor(resources.getColor(R.color.SP1))
+                    } else {
+                        color_bar_d.setBackgroundColor(resources.getColor(R.color.SP2))
+                    }
+
 
                 }
             }
@@ -106,13 +92,16 @@ class ProjectDetail : AppCompatActivity() {
                 Log.d("SPARK-API", "Failed to Request!")
             }
 
-
         })
+
         val project = arrayOf(title,name,semes,type)
         savedProj.setOnClickListener{
+            Toast.makeText(this,"Added to favourites",Toast.LENGTH_SHORT).show()
             val intent2 = Intent()
             intent2.putExtra("SAVED", project)
+            Log.d("CHECK",project[0].toString())
             setResult(Activity.RESULT_OK,intent2)
+            savedProj.setImageResource(R.drawable.ic_action_filled_heart)
         }
 
         radio.setOnCheckedChangeListener { group, checkedId ->
@@ -126,7 +115,6 @@ class ProjectDetail : AppCompatActivity() {
                 }
 
             } else {
-
                 val project_team = ProjectTeamFragment.newInstance(projectNumber.toString())
                 team.setOnClickListener {
                     supportFragmentManager.beginTransaction()

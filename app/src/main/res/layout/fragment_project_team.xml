@@ -10,14 +10,14 @@
         android:id="@+id/projDetail"
         android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/cabin_semibold"
         android:lineSpacingExtra="5dp"
         android:text=" "
         android:textColor="#222222"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,75 +25,66 @@
         android:id="@+id/groupMember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/cabin_bold"
         android:text="Group Members"
         android:textColor="#80222222"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.120"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/projDetail" />
+
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--    android:id="@+id/circleImageView"-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="49dp"-->
+<!--    android:layout_gravity="left"-->
+<!--    android:layout_marginStart="32dp"-->
+<!--    android:layout_marginTop="12dp"-->
+<!--    android:src="@drawable/darun"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/divider" />-->
 
     <TextView
         android:id="@+id/divider"
         android:layout_width="348dp"
         android:layout_height="3dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginBottom="16dp"
         android:background="#DDDDDD"
         android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/projectAdvisorName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupMember" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/circleImageView"
-    android:layout_width="52dp"
-    android:layout_height="49dp"
-    android:layout_gravity="left"
-    android:layout_marginStart="32dp"
-    android:layout_marginTop="12dp"
-    android:src="@drawable/darun"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/groupMember"
+        app:layout_constraintVertical_bias="0.996" />
 
     <TextView
         android:id="@+id/projectAdvisor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="56dp"
         android:fontFamily="@font/cabin_semibold"
         android:text="Project Advisor"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.307"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projectAdvisorName" />
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/projectAdvisorName"
-        android:layout_width="216dp"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/cabin_semibold"
         android:text=" "
         android:textColor="#222222"
         android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/viewAdvisorButtonGrid"
-        app:layout_constraintHorizontal_bias="0.343"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <ImageButton
-        android:id="@+id/viewAdvisorButtonGrid"
-        android:layout_width="43dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/circle_button"
-        android:src="@drawable/ic_action_rightarrow"
+        app:layout_constraintBottom_toTopOf="@+id/projectAdvisor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

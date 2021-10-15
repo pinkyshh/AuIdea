@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.advisor_grid.*
 import kotlinx.android.synthetic.main.profile_popup.*
 import kotlinx.android.synthetic.main.profile_popup.view.*
@@ -33,9 +34,15 @@ class ProfileFragment:Fragment() {
 
             val name =  view.userName
             val email = view.userEmail
+            val image = view.userProfileImg
+            val id = view.userID
 
+            var id_string = signInAccount.email
+            var id_int = (id_string.substring(1,8)).toInt()
             name.setText(signInAccount.displayName)
             email.setText(signInAccount.email)
+            Picasso.get().load(signInAccount.photoUrl).into(image)
+            id.setText(id_int.toString())
         }
 
         view.logoutButton.setOnClickListener{
