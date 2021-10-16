@@ -1,6 +1,7 @@
 package lipika.androidapp.gridlayoutadvisor
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import api.AllApi
 import api.Recommendation
 import api.RecommendationItem
-import api.RecommendedResponse
-import kotlinx.android.synthetic.main.activity_recommend.saveRecyclerView
+import kotlinx.android.synthetic.main.activity_recommend.*
 import kotlinx.android.synthetic.main.item_container_sp1.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,6 +58,7 @@ class RecommendFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.activity_recommend,container, false)
+
         return view
     }
 
@@ -67,17 +68,17 @@ class RecommendFragment : Fragment() {
         listAdapter = ProjectAdapter(list)
         saveRecyclerView.adapter = listAdapter
 
-
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
                 GsonConverterFactory.create()
             ).build()
 
         val Api: AllApi = retrofit.create(AllApi::class.java)
+        val stdID = activity?.getPreferences(Context.MODE_PRIVATE)?.getInt(LoginActivity.PASSKEY,-1)
 
 
 //        Get Recommendation HomeScreen
-        val getRecommendationRequest: Call<Recommendation> = Api.getRecommendation(param1)
+        val getRecommendationRequest: Call<Recommendation> = Api.getRecommendation(stdID.toString())
         getRecommendationRequest.enqueue(object : Callback<Recommendation> {
 
             override fun onResponse(call: Call<Recommendation>, response: Response<Recommendation>) {
@@ -93,6 +94,14 @@ class RecommendFragment : Fragment() {
                 Log.d("SPARK-API", "Failed to Request!")
             }
         })
+    }
+    private fun getStudentId(): String {
+        val parentActivity = requireActivity()
+        if (parentActivity is HomeActivity) {
+            val studentId = parentActivity.studentId
+            return studentId
+        }
+        return ""
     }
 
 

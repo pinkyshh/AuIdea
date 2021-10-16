@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import api.AllApi
 import api.HomeProject
 import api.ProjectResponse
@@ -32,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProjectDetail : AppCompatActivity() {
 
     var mydownloadid: Long = 0
+    var empty=true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,8 @@ class ProjectDetail : AppCompatActivity() {
         var name = intent.getStringExtra("GRP")
         var semes = intent.getStringExtra("SEM")
         var type = intent.getStringExtra("TYPE")
+        empty=intent.getBooleanExtra("EMPTY",true)
+
 
         val retrofit: Retrofit =
             Retrofit.Builder().baseUrl("https://auidea.azurewebsites.net/").addConverterFactory(
@@ -95,6 +99,8 @@ class ProjectDetail : AppCompatActivity() {
         })
 
         val project = arrayOf(title,name,semes,type)
+        savedProj.isVisible=empty
+
         savedProj.setOnClickListener{
             Toast.makeText(this,"Added to favourites",Toast.LENGTH_SHORT).show()
             val intent2 = Intent()

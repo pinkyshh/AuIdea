@@ -16,7 +16,7 @@ class DownloadActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.project_detail)
+       // setContentView(R.layout.project_detail)
 
         //        Download Manager
         var request = DownloadManager.Request(

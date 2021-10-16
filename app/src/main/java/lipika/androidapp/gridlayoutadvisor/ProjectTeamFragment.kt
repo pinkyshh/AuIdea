@@ -56,7 +56,7 @@ class ProjectTeamFragment:Fragment() {
             override fun onResponse(call: Call<ProjectResponse>, response: Response<ProjectResponse>) {
                 var projectResponse = response.body()
                 if (projectResponse!=null) {
-                    view.findViewById<TextView>(R.id.projDetail).text = projectResponse[0].groupMembers.replace(" , ", "\n\n")
+                    view.findViewById<TextView>(R.id.projDetail).text = projectResponse[0].groupMembers.split(",").map { it.trim() }.joinToString("\n")
                     view.findViewById<TextView>(R.id.projectAdvisorName).text = projectResponse[0].advisorName
 
 

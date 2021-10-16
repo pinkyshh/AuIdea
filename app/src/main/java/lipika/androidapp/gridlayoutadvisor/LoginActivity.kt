@@ -19,9 +19,10 @@ import kotlinx.android.synthetic.main.profile_popup.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private companion object{
+    companion object{
         private const val TAG = "LoginActivity"
         private const val RC_GOOGLE_SIGN_IN = 4926
+        val PASSKEY="id"
     }
 
     private lateinit var auth: FirebaseAuth
@@ -58,7 +59,14 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        startActivity(Intent(this, HomeActivity::class.java))
+        var id_int = user.email?.substring(1, 8)?.toString()
+        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+            putExtra("studentId", id_int)
+        }
+
+        startActivity(homeIntent)
+
+        //startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 
@@ -97,4 +105,5 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
 }
