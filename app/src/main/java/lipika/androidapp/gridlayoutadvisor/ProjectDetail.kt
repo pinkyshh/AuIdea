@@ -70,8 +70,7 @@ class ProjectDetail : AppCompatActivity() {
                 var projectResponse = response.body()
                 Log.d("SPARK-API", response.message())
                 Log.d("SPARK-API", projectNumber.toString())
-
-
+                
                 if (projectResponse != null) {
                     spType.text = "Senior Project " + projectResponse[0].projectType.toString()
                     type = projectResponse[0].projectType.toString()
@@ -87,8 +86,6 @@ class ProjectDetail : AppCompatActivity() {
                     } else {
                         color_bar_d.setBackgroundColor(resources.getColor(R.color.SP2))
                     }
-
-
                 }
             }
 
