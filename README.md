@@ -3,7 +3,7 @@ A platform for students to see a list of available senior projects and recommend
 # Detail
 Senior projects are part of the Bachelor of Science program at Assumption University of Thailand. 3rd and 4th year student must work on one project for the entire semester, making something that can be used in the real world by users. These projects are advised by the faculty professors and students can work in a team of 1-3 members. 
 
-Our application tries to provide all of these useful information to freshman in order to guide them for their future projects. We provide a list of projects with their useful information, the project report, the project advisor's information and many more. Viewing the projects done in the past can help students in coming up with their own ideas when enrolling for senior project 1 or 2. 
+This application tries to provide all of these useful information to freshman in order to guide them for their future projects. It provides a list of projects with their useful information, the project report, the project advisor's information and many more features. Viewing the projects done in the past can help students in coming up with their own ideas when enrolling for senior project 1 or 2. 
 
 # Platform
 The application was developed on Android Studio using Kotlin language. It has connections to ASP.Net, SQL Server and Firebase.
