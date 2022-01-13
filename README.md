@@ -13,7 +13,7 @@ The features of the application include (find images below) :
 ** Note: Some names have been hidden for privacy issues. **
 
 # UI
-The colors and theme of the application is based on the faculty's brand color (purple) for whom the application was developed. 
+The colors and theme of the application is based on the faculty's brand color (purple) for whom the application was developed. The application has only one theme, light theme. It was designed with the help of gestalts principles to organize the contents so it is aesthetically pleasing and easy to understand.
 
 (1)
 
