@@ -16,7 +16,7 @@ The features of the application include (find images below) :
 The colors and theme of the application is based on the faculty's brand color (purple) for whom the application was developed. 
 
 (1)
-![AuIdea](https://user-images.githubusercontent.com/74553566/149331735-d8d2d1f1-2c00-4fcb-8283-b62ca2931e31.png =250x500)
+<img src="https://user-images.githubusercontent.com/74553566/149331735-d8d2d1f1-2c00-4fcb-8283-b62ca2931e31.png" width="200" height="400" />
 ![Profile](https://user-images.githubusercontent.com/74553566/149332177-04298430-3046-4195-8248-45699ce3a697.png)
 
 (2)
