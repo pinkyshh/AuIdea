@@ -11,7 +11,7 @@ The features of the application include :
   - User login and sign up
   - A list of projects that lead to its full information and project report
   - A filter feature on the home screen
-  - A save / favourites feature
+  - A saved / favourites feature
 
 ** Note: Some names have been hidden for privacy issues. **
 
