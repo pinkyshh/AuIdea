@@ -38,6 +38,6 @@ The colors and theme of the application is based on the faculty's brand color (p
 
 <img src="https://user-images.githubusercontent.com/74553566/149332068-854a738a-dc5d-4fe6-8527-b89c42550ac9.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/74553566/149332084-58cecd7c-29ee-4f43-b7bc-ad6405a70e7e.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/74553566/149332079-fd590f8f-308e-4c47-a307-b8efc144560c.png" width="200" height="400" />
 
-(6) About Senior Project screen
+(6) About Senior Project Screen
 
 <img src="https://user-images.githubusercontent.com/74553566/149332116-3a170818-621c-4380-98bf-9a11c79ca511.png" width="200" height="600" /> <img src="https://user-images.githubusercontent.com/74553566/149332125-f976773d-5e87-4c38-b905-54976561c45d.png" width="200" height="600" />
